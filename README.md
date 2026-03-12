@@ -71,8 +71,14 @@ This will start a **Gradio web interface** where users can upload a liver biopsy
 
 ---
 
+## 3 Output
+
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/674d68f5-0f76-429d-b09e-4d56a84e6341" />
+
+
 ## Author
 
 **Harika Gonaboina**
 MCA Final Year Project
 Hepatitis Virus Detection Using Deep Learning
+
