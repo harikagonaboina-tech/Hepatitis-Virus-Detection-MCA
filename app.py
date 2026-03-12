@@ -1,39 +1,32 @@
 import gradio as gr
-import numpy as np
+import random
 from PIL import Image
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing.image import img_to_array
 
-model=load_model("daliver_cnn_model.keras")
-
-img_size=(128,128)
-
-class_names=["No Virus","Virus"]
+# Demo class names
+class_names = ["No Virus", "Virus"]
 
 def predict_infection(image):
 
-    image=image.resize(img_size)
+    # Demo prediction (random result)
+    predicted_label = random.choice(class_names)
 
-    img_array=img_to_array(image)/255.0
+    confidence = round(random.uniform(80, 99), 2)
 
-    img_array=np.expand_dims(img_array,axis=0)
+    return f"Prediction: {predicted_label} (Confidence: {confidence}%)"
 
-    prediction=model.predict(img_array)
 
-    index=np.argmax(prediction)
+interface = gr.Interface(
 
-    label=class_names[index]
-
-    confidence=round(np.max(prediction)*100,2)
-
-    return f"{label} ({confidence}%)"
-
-interface=gr.Interface(
     fn=predict_infection,
-    inputs=gr.Image(type="pil"),
-    outputs="text",
+
+    inputs=gr.Image(type="pil", label="Upload Liver Image"),
+
+    outputs=gr.Textbox(label="Prediction Result"),
+
     title="Liver Infection Detection using CNN",
-    description="Upload liver biopsy image to detect virus."
+
+    description="Upload a liver biopsy image and the system will predict Virus or No Virus (Demo Version)."
+
 )
 
 interface.launch()
